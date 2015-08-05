@@ -1,4 +1,6 @@
-;(function($) {
+var users = users || {};
+
+(function($) {
 
     "use strict";
 
@@ -32,8 +34,6 @@
 
         // Переопределение методов users
         usersExtend: function() {
-
-            var users = window.users || {};
 
             $.extend(users, {
 

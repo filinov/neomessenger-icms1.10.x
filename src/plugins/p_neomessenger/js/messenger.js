@@ -364,7 +364,11 @@ var users = users || {};
                         $('.nm-content').show();
 
                         if ($(window).width() > 479) {
-                            self.select(self.contactsList[(self.contactsList.length > 1 ? 1 : 0)].id);
+                            if (nm.recipientId != 0) {
+                                self.select(nm.recipientId);
+                            } else {
+                                self.select(self.contactsList[0].id);
+                            }
                         }
 
                         nm.modal.$el.addClass('nm-contacts-loaded');

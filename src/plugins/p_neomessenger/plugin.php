@@ -123,8 +123,6 @@ class p_neomessenger extends cmsPlugin {
         $inPage->addHeadCSS("$plugin/css/styles.css?no_cache=" . $noCache);
         $inPage->addHeadJS("$plugin/js/isMobile.js");
 
-        $inPage->addHeadJS("$plugin/js/gremlins.min.js");
-
         $inPage->addHeadJS("$plugin/js/animatetitle.js");
         $inPage->addHeadJS("$plugin/js/jquery.waitforimages.js");
         $inPage->addHeadJS("$plugin/js/messenger.js?no_cache=" . $noCache);

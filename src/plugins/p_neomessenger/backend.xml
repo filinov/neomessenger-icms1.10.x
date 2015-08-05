@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<backend>
+    <info>
+        <type>plugin</type>
+        <id>p_neomessenger</id>
+    </info>
+    <params>
+        <param type="number" name="PNM_TIME_UPDATE" default="20"/>
+        <param type="list" name="PNM_SEND_TYPE" default="1">
+            <option value="1" />
+            <option value="2" />
+        </param>
+        <param type="flag" name="PNM_CLOSE_OVERLAY" default="on"/>
+    </params>
+</backend>

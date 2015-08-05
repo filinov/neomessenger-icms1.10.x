@@ -12,10 +12,7 @@ class p_neomessenger extends cmsPlugin {
 
     public function __construct()
     {
-        parent::__construct();
-
         // Информация о плагине
-
         $this->info['plugin']      = 'p_neomessenger';
         $this->info['title']       = 'NeoMessenger';
         $this->info['description'] = 'Переписка в всплывающем окне на аякс';
@@ -30,6 +27,7 @@ class p_neomessenger extends cmsPlugin {
         // События, которые будут отлавливаться плагином
         $this->events[] = 'PRINT_PAGE_HEAD';
 
+        parent::__construct();
     }
 
 /* -------------------------------------------------------------------------- */
@@ -63,8 +61,6 @@ class p_neomessenger extends cmsPlugin {
      */
     public function execute($event = '', $item = array())
     {
-        parent::execute();
-
         switch ($event)
         {
             case 'PRINT_PAGE_HEAD': $item = $this->AddPluginToPage($item); break;
@@ -105,7 +101,7 @@ class p_neomessenger extends cmsPlugin {
 
             'opt' => array(
                 'listenInterval' => (int)$this->config['PNM_TIME_UPDATE'],
-                'sendOnEnter'    => (bool)$this->config['PNM_SEND_TYPE'],
+                'sendOnEnter'    => $this->config['PNM_SEND_TYPE'] == 1,
                 'closeOverlay'   => (bool)$this->config['PNM_CLOSE_OVERLAY'],
             ),
 

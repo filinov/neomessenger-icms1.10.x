@@ -26,7 +26,6 @@ class p_neomessenger extends cmsPlugin {
         $this->config['PNM_TIME_UPDATE']   = 20;
         $this->config['PNM_SEND_TYPE']     = 1;
         $this->config['PNM_CLOSE_OVERLAY'] = 0;
-        $this->config['PNM_USERS_DEBUG']   = '';
 
         // События, которые будут отлавливаться плагином
         $this->events[] = 'PRINT_PAGE_HEAD';
@@ -86,16 +85,6 @@ class p_neomessenger extends cmsPlugin {
         if (!$inUser->id || defined('VALID_CMS_ADMIN'))
         {
             return $head;
-        }
-
-        if ($this->config['PNM_USERS_DEBUG'])
-        {
-            $debug_ids = explode(',', str_replace(' ', '', $this->config['PNM_USERS_DEBUG']));
-
-            if ($debug_ids && !in_array($inUser->id, $debug_ids))
-            {
-                return $head;
-            }
         }
 
         $inPage = cmsPage::getInstance();

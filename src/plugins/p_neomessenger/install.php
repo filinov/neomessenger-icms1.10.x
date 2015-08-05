@@ -46,7 +46,7 @@
 
         $_SESSION['nm']['values'] = array();
         $_SESSION['nm']['count']  = $msg_count;
-        $_SESSION['nm']['steps']  = ($steps === 0) ? 1 : $steps;
+        $_SESSION['nm']['steps']  = ($steps == 0) ? 1 : $steps;
         $_SESSION['nm']['step']   = 1;
 
         cmsCore::jsonOutput(array(

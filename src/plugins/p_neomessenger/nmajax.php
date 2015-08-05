@@ -99,12 +99,14 @@
     // Обновление списка контактов и новых сообщений
     if ($act == 'getUpdate')
     {
-        $contact_id  = cmsCore::request('contact_id', 'int', 0);
+        $contact_id  = cmsCore::request('contact_id', 'int', false);
         $msg_last_id = cmsCore::request('message_last_id', 'int', 0);
 
-        if (!$contact_id) { cmsCore::halt(); }
-
         $inUser->onlineStats();
+
+        if (!$contact_id) {
+            cmsCore::jsonOutput(array());
+        }
 
         $new_messages = nmCore::getNewMessagesCount($inUser->id);
         $contacts     = nmCore::getContacts($inUser->id);

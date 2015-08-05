@@ -206,38 +206,40 @@ var users = users || {};
 
                     if (nm.modal.visible) {
                         nm.post('getUpdate', {
-                            contact_id: nm.contacts.current.id,
+                            contact_id: nm.contacts.current.id || 0,
                             message_last_id: nm.messages.lastId
                         }, function(data) {
-                            if (data.contacts.length) {
-                                $.each(data.contacts, function() {
-                                    if (!nm.contacts.isExist(this.id)) {
-                                        nm.contacts.add(this);
-                                        nm.contacts.top(this.id);
-                                    } else {
-                                        nm.contacts.setCounter(this.id, this.new_messages);
-                                        nm.contacts.setStatus(this.id, this.online);
-                                    }
-                                });
-                            }
+                            if (data.length) {
+                                if (data.contacts.length) {
+                                    $.each(data.contacts, function () {
+                                        if (!nm.contacts.isExist(this.id)) {
+                                            nm.contacts.add(this);
+                                            nm.contacts.top(this.id);
+                                        } else {
+                                            nm.contacts.setCounter(this.id, this.new_messages);
+                                            nm.contacts.setStatus(this.id, this.online);
+                                        }
+                                    });
+                                }
 
-                            if (data.messages.length) {
-                                $.each(data.messages, function() {
-                                    nm.messages.add(this);
-                                    nm.messages.lastId = this.id;
-                                });
+                                if (data.messages.length) {
+                                    $.each(data.messages, function () {
+                                        nm.messages.add(this);
+                                        nm.messages.lastId = this.id;
+                                    });
 
-                                $('#nm-chat').waitForImages({
-                                    finished: function() {
-                                        nm.messages.scroll();
-                                    },
-                                    waitForAll: true
-                                });
-                            }
+                                    $('#nm-chat').waitForImages({
+                                        finished: function () {
+                                            nm.messages.scroll();
+                                        },
+                                        waitForAll: true
+                                    });
+                                }
 
-                            if (data.new_messages !== nm.msgCounter) {
-                                nm.msgCounter = data.new_messages;
-                                nm.updateMsgCounter();
+                                if (data.new_messages !== nm.msgCounter) {
+                                    nm.msgCounter = data.new_messages;
+                                    nm.updateMsgCounter();
+                                }
                             }
                         });
                     } else {

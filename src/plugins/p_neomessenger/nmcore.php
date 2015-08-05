@@ -99,14 +99,11 @@ class nmCore {
         $inDB = cmsDatabase::getInstance();
 
         $res = $inDB->query("
-            SELECT c.*, u.id as id, u.nickname as nickname, u.login as login, p.imageurl as avatar, IFNULL(COUNT(m.id), 0) as new_messages, IF(o.user_id, 1, 0) as online
+            SELECT c.*, u.id as id, u.nickname as nickname, u.login as login, p.imageurl as avatar
             FROM cms_user_contacts c
             JOIN cms_users as u ON u.id = c.contact_id
             LEFT JOIN cms_user_profiles as p ON p.user_id = c.contact_id
-            LEFT JOIN cms_user_msg as m ON m.from_id = c.contact_id AND m.to_id = c.user_id AND m.is_new = 1
-            LEFT JOIN cms_online as o ON o.user_id = c.contact_id
             WHERE c.user_id = '$user_id' AND c.contact_id > 0
-            GROUP BY c.contact_id
             ORDER BY c.date_last_msg desc
             LIMIT 1000
         ");
@@ -121,9 +118,9 @@ class nmCore {
                     'id' => (int) $contact['id'],
                     'url' => cmsUser::getProfileURL($contact['login']),
                     'avatar' => cmsUser::getUserAvatarUrl($contact['id'], 'small', $contact['avatar']),
-                    'online' => $contact['online'],
+                    'online' => $inDB->rows_count('cms_online', 'user_id = '.$contact['contact_id']),
                     'nickname' => $contact['nickname'],
-                    'new_messages' => $contact['new_messages']
+                    'new_messages' => $inDB->get_field('cms_user_msg', 'to_id = '.$user_id.' AND is_new = 1 AND from_id = '.$contact['contact_id'], 'count(*)')
                 ));
             }
         }

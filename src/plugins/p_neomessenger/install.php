@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
  *                                                                             *
- *                         Плагин NeoMessenger ver:2.1.2                       *
+ *                         Плагин NeoMessenger ver:2.1.3                       *
  *                              Автор: NEOm@ster                               *
  *                         http://vk.com/filinov_victor                        *
  *                                                                             *
@@ -23,7 +23,7 @@
     $inConf = cmsConfig::getInstance();
     $inDB   = cmsDatabase::getInstance();
 
-    $version  = "2.1.2";
+    $version  = "2.1.3";
     $one_step = 1000; // Обрабатывать сообщений за один шаг
 
     $act = cmsCore::request('act', 'str', 'index');

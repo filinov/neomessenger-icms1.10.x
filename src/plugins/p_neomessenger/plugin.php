@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
  *                                                                             *
- *                         Плагин NeoMessenger ver:2.1.2                       *
+ *                         Плагин NeoMessenger ver:2.1.3                       *
  *                              Автор: NEOm@ster                               *
  *                         http://vk.com/filinov_victor                        *
  *                                                                             *
@@ -16,7 +16,7 @@ class p_neomessenger extends cmsPlugin {
         $this->info['title']       = 'NeoMessenger';
         $this->info['description'] = 'Переписка в всплывающем окне на аякс';
         $this->info['author']      = '<a target="_blank" href="https://vk.com/neomessenger">NEOm@ster</a>';
-        $this->info['version']     = '2.1.1';
+        $this->info['version']     = '2.1.3';
 
         // Настройки по-умолчанию
         $this->config['PNM_TIME_UPDATE']   = 20;
@@ -113,11 +113,6 @@ class p_neomessenger extends cmsPlugin {
             'soundName'      => "/$plugin/sounds/notify"
 
         );
-
-/* -------------------------------------------------------------------------- */
-
-        $inPage->addHeadJS('core/js/smiles.js');
-        $inPage->addHeadJS('includes/jquery/upload/ajaxfileupload.js');
 
 /* -------------------------------------------------------------------------- */
 

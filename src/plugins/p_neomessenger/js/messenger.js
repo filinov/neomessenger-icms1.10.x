@@ -752,14 +752,27 @@ var users = users || {};
 
                 var $contact = $('#nm-contact' + nm.contacts.current.id);
                 var $counter = $('.counter', $contact);
-                var count    = $counter.length ? $counter.attr('rel') : 0;
+                var count    = $counter.length ? parseInt($counter.attr('rel')) : 0;
 
-                nm.contacts.setCounter(nm.contacts.current.id, --count);
+                if (nm.opt.readAllMsg) {
+                    nm.contacts.setCounter(nm.contacts.current.id, 0);
+                    nm.msgCounter = nm.msgCounter - count;
+                    $('.conversation-item.item-left.new').removeClass('new');
+                    nm.post('setMsgReaded', {
+                        message_id: 0,
+                        contact_id: nm.contacts.current.id,
+                        all: 1
+                    });
+                } else {
+                    nm.contacts.setCounter(nm.contacts.current.id, --count);
+                    nm.msgCounter = nm.msgCounter - 1;
+                    $('#nm-message-' + id).removeClass('new');
+                    nm.post('setMsgReaded', {
+                        message_id: id
+                    });
+                }
 
-                --nm.msgCounter;
                 nm.updateMsgCounter();
-                $('#nm-message-' + id).removeClass('new');
-                nm.post('setMsgReaded', {message_id: id});
 
             },
 

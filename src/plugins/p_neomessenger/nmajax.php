@@ -256,11 +256,22 @@
     // Отмечает сообщение как прочитанное
     if ($act == 'setMsgReaded')
     {
+        $is_all_msg = cmsCore::request('all', 'int', 0);
         $message_id = cmsCore::request('message_id', 'int', 0);
+        $contact_id = cmsCore::request('contact_id', 'int', 0);
 
-        if (!$message_id) { cmsCore::halt(); }
+        if (!$is_all_msg && !$message_id) { cmsCore::halt(); }
+        if ($is_all_msg && !$contact_id) { cmsCore::halt(); }
 
-        $result = $inDB->query("UPDATE cms_user_msg m SET is_new = 0 WHERE m.id = '$message_id' LIMIT 1");
+        if ($is_all_msg) {
+            if ($contact_id > 0) {
+                $result = $inDB->query("UPDATE cms_user_msg m SET is_new = 0 WHERE m.is_new = 1 AND m.from_id = $contact_id AND m.to_id = {$inUser->id} LIMIT 50");
+            } else {
+                $result = $inDB->query("UPDATE cms_user_msg m SET is_new = 0 WHERE m.is_new = 1 AND m.from_id < 0 AND m.to_id = {$inUser->id} LIMIT 50");
+            }
+        } else {
+            $result = $inDB->query("UPDATE cms_user_msg m SET is_new = 0 WHERE m.id = '$message_id' LIMIT 1");
+        }
 
         cmsCore::jsonOutput(array('response' => $result));
     }

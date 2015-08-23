@@ -17,3 +17,4 @@ $_LANG['PLU_PNM_SEND_TYPE_OPT_1']   = 'Enter';
 $_LANG['PLU_PNM_SEND_TYPE_OPT_2']   = 'Ctrl + Enter';
 
 $_LANG['PLU_PNM_CLOSE_OVERLAY']     = 'Закрытие окна при клике на задний фон';
+$_LANG['PLU_PNM_READ_ALL_MSG']      = 'Отмечать все сообщения прочитанными, при наведении на одно из них';

@@ -11,5 +11,6 @@
             <option value="2" />
         </param>
         <param type="flag" name="PNM_CLOSE_OVERLAY" default="on"/>
+        <param type="flag" name="PNM_READ_ALL_MSG" default="off"/>
     </params>
 </backend>

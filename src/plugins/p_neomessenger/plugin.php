@@ -22,6 +22,7 @@ class p_neomessenger extends cmsPlugin {
         $this->config['PNM_TIME_UPDATE']   = 20;
         $this->config['PNM_SEND_TYPE']     = 1;
         $this->config['PNM_CLOSE_OVERLAY'] = 0;
+        $this->config['PNM_READ_ALL_MSG']  = 0;
 
         // События, которые будут отлавливаться плагином
         $this->events[] = 'PRINT_PAGE_HEAD';
@@ -99,9 +100,10 @@ class p_neomessenger extends cmsPlugin {
             ),
 
             'opt' => array(
-                'listenInterval' => (int)$this->config['PNM_TIME_UPDATE'],
-                'sendOnEnter'    => $this->config['PNM_SEND_TYPE'] == 1,
+                'listenInterval' => (int) $this->config['PNM_TIME_UPDATE'],
+                'sendOnEnter'    =>       $this->config['PNM_SEND_TYPE'] == 1,
                 'closeOverlay'   => (bool)$this->config['PNM_CLOSE_OVERLAY'],
+                'readAllMsg'     => (bool)$this->config['PNM_READ_ALL_MSG']
             ),
 
             'msgCounter'     => nmCore::getNewMessagesCount($inUser->id),
